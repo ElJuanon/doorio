@@ -1,5 +1,6 @@
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
+import 'package:doorio/utils/colors.dart';
 import 'package:doorio/utils/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -72,17 +73,17 @@ class _HomePage extends StatelessWidget {
           title: Text("Inicio"),
           centerTitle: true,
         ),
-        body: _showBody(_userProfile),
+        body: _showBody(_userProfile, context),
       ),
     );
   }
 
-  _showBody(UserProfile _userProfile) {
+  _showBody(UserProfile _userProfile, BuildContext context) {
     try {
       switch (_userProfile.type) {
         case "visitor":
           //cuando es visita mostramos lo sig
-          return _guestPage();
+          return _guestPage(context);
           break;
         case "user":
           //cuando es usuario
@@ -105,12 +106,68 @@ class _HomePage extends StatelessWidget {
     }
   }
 
-  _guestPage() {
+  _guestPage(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           //aqui va la pagina de visita
-          Text('visita'),
+          Center(
+            child: Text(
+              'Crear pase nuevo',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: RaisedButton(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext bc) {
+                      return StatefulBuilder(
+                          builder: (BuildContext context, StateSetter state) {
+                        return Container(
+                          padding: EdgeInsets.all(16),
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Center(
+                                child: Text(
+                                  'Al parecer no tienes una cuenta registrada con este numero, crea una cuenta nueva. \nSi tienes problemas creando tu cuenta contactanos al sig. numero: 01800123456',
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+                                ),
+                              ),
+                              FlatButton(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 50, vertical: 10),
+                                  color: AsterColors.appColor,
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text(
+                                    'Aceptar',
+                                    style: TextStyle(color: Colors.white),
+                                  ))
+                            ],
+                          ),
+                        );
+                      });
+                    });
+              },
+              child: Text(
+                'Crear',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              color: AsterColors.appColor,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
         ],
       ),
     );
