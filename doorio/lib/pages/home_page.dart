@@ -124,7 +124,7 @@ class _HomePage extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-          )
+          ),
           //aqui va la pagina de visita
           Center(
             child: Text(
