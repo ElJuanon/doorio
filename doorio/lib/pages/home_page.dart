@@ -73,37 +73,43 @@ class _HomePage extends StatelessWidget {
           title: Text("Inicio"),
           centerTitle: true,
         ),
-        body: _showBody(_userProfile),
+        body: _showBody(_userProfile, context),
       ),
     );
   }
 
-  _showBody(UserProfile _userProfile) {
-    switch (_userProfile.type) {
-      case "visitor":
-        //cuando es visita mostramos lo sig
-        return _guestPage();
-        break;
-      case "user":
-        //cuando es usuario
-        return _userPage();
-        break;
-      case "admin":
-        //cuando es admin
-        return _adminPage();
-        break;
-      case "super":
-        //cuando es superAdmin
-        return _superPage();
-        break;
-      default:
-        Container();
+  _showBody(UserProfile _userProfile, BuildContext context) {
+    try {
+      switch (_userProfile.type) {
+        case "visitor":
+          //cuando es visita mostramos lo sig
+          return _guestPage(context);
+          break;
+        case "user":
+          //cuando es usuario
+          return _userPage();
+          break;
+        case "admin":
+          //cuando es admin
+          return _adminPage();
+          break;
+        case "super":
+          //cuando es superAdmin
+          return _superPage();
+          break;
+        default:
+          Container();
+      }
+    } catch (e) {
+      print(e);
+      return Container();
     }
   }
 
-  _guestPage() {
+  _guestPage(BuildContext context) {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
@@ -120,6 +126,62 @@ class _HomePage extends StatelessWidget {
             ),
           )
           //aqui va la pagina de visita
+          Center(
+            child: Text(
+              'Crear pase nuevo',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: RaisedButton(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext bc) {
+                      return StatefulBuilder(
+                          builder: (BuildContext context, StateSetter state) {
+                        return Container(
+                          padding: EdgeInsets.all(16),
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Center(
+                                child: Text(
+                                  'Al parecer no tienes una cuenta registrada con este numero, crea una cuenta nueva. \nSi tienes problemas creando tu cuenta contactanos al sig. numero: 01800123456',
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 15),
+                                ),
+                              ),
+                              FlatButton(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 50, vertical: 10),
+                                  color: AsterColors.appColor,
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text(
+                                    'Aceptar',
+                                    style: TextStyle(color: Colors.white),
+                                  ))
+                            ],
+                          ),
+                        );
+                      });
+                    });
+              },
+              child: Text(
+                'Crear',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              color: AsterColors.appColor,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -130,6 +192,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de usuarios
+          Text('usuario'),
         ],
       ),
     );
@@ -140,6 +203,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de admin
+          Text('admin'),
         ],
       ),
     );
@@ -150,6 +214,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de super usuarios
+          Text('super user'),
         ],
       ),
     );
