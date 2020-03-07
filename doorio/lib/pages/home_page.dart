@@ -78,25 +78,30 @@ class _HomePage extends StatelessWidget {
   }
 
   _showBody(UserProfile _userProfile) {
-    switch (_userProfile.type) {
-      case "visitor":
-        //cuando es visita mostramos lo sig
-        return _guestPage();
-        break;
-      case "user":
-        //cuando es usuario
-        return _userPage();
-        break;
-      case "admin":
-        //cuando es admin
-        return _adminPage();
-        break;
-      case "super":
-        //cuando es superAdmin
-        return _superPage();
-        break;
-      default:
-        Container();
+    try {
+      switch (_userProfile.type) {
+        case "visitor":
+          //cuando es visita mostramos lo sig
+          return _guestPage();
+          break;
+        case "user":
+          //cuando es usuario
+          return _userPage();
+          break;
+        case "admin":
+          //cuando es admin
+          return _adminPage();
+          break;
+        case "super":
+          //cuando es superAdmin
+          return _superPage();
+          break;
+        default:
+          Container();
+      }
+    } catch (e) {
+      print(e);
+      return Container();
     }
   }
 
@@ -105,6 +110,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de visita
+          Text('visita'),
         ],
       ),
     );
@@ -115,6 +121,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de usuarios
+          Text('usuario'),
         ],
       ),
     );
@@ -125,6 +132,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de admin
+          Text('admin'),
         ],
       ),
     );
@@ -135,6 +143,7 @@ class _HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //aqui va la pagina de super usuarios
+          Text('super user'),
         ],
       ),
     );
