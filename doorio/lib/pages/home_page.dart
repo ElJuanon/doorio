@@ -23,17 +23,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseUser user = Provider.of<FirebaseUser>(context);
-
-    return MultiProvider(
-      providers: [
-        StreamProvider<UserProfile>.value(
-          value: DatabaseService().streamUserProfile(user.uid),
-        )
-      ],
-      child: _HomePage(
-        onSignedOut: _signOut,
-      ),
-    );
+    if (user != null) {
+      return MultiProvider(
+        providers: [
+          StreamProvider<UserProfile>.value(
+            value: DatabaseService().streamUserProfile(user.uid),
+          )
+        ],
+        child: _HomePage(
+          onSignedOut: _signOut,
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
 
@@ -228,8 +231,7 @@ class _HomePage extends StatelessWidget {
                                           print('error: ');
                                           //si existe
                                         }).catchError((e) {
-                                          print('error: '+e);
-
+                                          print('error: ' + e);
                                         });
                                         // if (isValid) {
                                         //   //validar que no exista una cuenta con el mismo numero
