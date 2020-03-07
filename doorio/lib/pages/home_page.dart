@@ -1,5 +1,6 @@
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
+import 'package:doorio/utils/colors.dart';
 import 'package:doorio/utils/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +105,20 @@ class _HomePage extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+            child: SizedBox(
+              height: 40.0,
+              child: new RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: AsterColors.buttons,
+                child: Container(),
+                onPressed: () {},
+              ),
+            ),
+          )
           //aqui va la pagina de visita
         ],
       ),
