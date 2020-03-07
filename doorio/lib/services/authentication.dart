@@ -56,7 +56,7 @@ class Auth implements BaseAuth {
         'uid': user.uid,
         'userName': userName,
         'created': DateTime.now(),
-        'type' : 'visiter',
+        'type' : 'visitor',
       });
     } else {
       return 'error';
