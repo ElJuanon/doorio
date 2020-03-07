@@ -19,30 +19,8 @@ enum FormMode { LOGIN, SIGNUP }
 class _LoginSignUpPageState extends State<LoginSignUpPage> {
   final _formKey = new GlobalKey<FormState>();
 
-  static const schools = <String>[
-    'IT Culiacán',
-    'UAdeO',
-    'UAS C.U.',
-    'Tec de Monterrey',
-    'TecMilenio',
-    'Universidad de Durango',
-    'Casa Blanca',
-    'Escuela Normal Sinaloa',
-  ];
-
-  final List<PopupMenuItem<String>> _popUpMenuSchools = schools
-      .map(
-        (String value) => PopupMenuItem<String>(
-          value: value,
-          child: Text(value),
-        ),
-      )
-      .toList();
-
   String _userName;
   String _email = '';
-  String _school;
-  String _major;
   String _password = '';
   String _passwordConfirm = '';
   String _errorMessage;
