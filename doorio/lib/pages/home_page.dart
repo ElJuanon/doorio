@@ -29,8 +29,8 @@ class HomePageState extends State<HomePage> {
                 accountEmail: Text(user.email??''),
               ),
               ListTile(
-                title: Text('Perfil'),
-                leading: Icon(Icons.account_circle),
+                title: Text('Entradas'),
+                leading: Icon(Icons.insert_drive_file),
               ),
               ListTile(
                 title: Text('Cerrar Sesion'),
