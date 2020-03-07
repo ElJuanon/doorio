@@ -53,28 +53,6 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   bool _isIos;
   bool _isLoading;
 
-  // void _getData() async {
-  //   QuerySnapshot doc = await Firestore.instance
-  //       .collection('schools')
-  //       .where('city', isEqualTo: 'Culiacán')
-  //       .getDocuments();
-
-  //   DocumentSnapshot doc2 = await Firestore.instance
-  //       .collection('majors')
-  //       .document('Culiacán')
-  //       .get();
-  //   //record.colleges.
-  // }
-
-  // void _getMajor()async{
-
-  // DocumentSnapshot doc2 = await Firestore.instance
-  //     .collection('majors')
-  //     .document('Culiacán')
-  //     .get();
-
-  // }
-
   // Check if form is valid before perform login or signup
   bool _validateAndSave() {
     final form = _formKey.currentState;
@@ -99,9 +77,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           userId = await widget.auth.signIn(_email, _password);
           print('Signed in: $userId');
         } else {
-          if (_userName != null && _school != null && _major != null) {
-            userId = await widget.auth
-                .signUp(_userName, _email, _school, _major, _password);
+          if (_userName != null && _email != null && _password != null) {
+            userId = await widget.auth.signUp(_userName, _email, _password);
             //widget.auth.sendEmailVerification();
             //_showVerifyEmailSentDialog();
             print('Signed up user: $userId');

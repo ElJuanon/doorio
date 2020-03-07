@@ -17,8 +17,16 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text("Inicio"),
+          centerTitle: true,
         ),
       ),
     );

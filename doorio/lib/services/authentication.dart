@@ -7,8 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 abstract class BaseAuth {
   Future<String> signIn(String email, String password);
 
-  Future<String> signUp(String userName, String email, String school,
-      String major, String password);
+  Future<String> signUp(String userName, String email, String password);
 
   Future<FirebaseUser> getCurrentUser();
 
@@ -44,12 +43,11 @@ class Auth implements BaseAuth {
     return user.uid;
   }
 
-  Future<String> signUp(String userName, String email, String school,
-      String major, String password) async {
+  Future<String> signUp(String userName, String email, String password) async {
     AuthResult _authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user = _authResult.user;
-    if (user != null && school != null && major != null && userName != null) {
+    if (user != null && userName != null) {
       UserUpdateInfo userdata = UserUpdateInfo();
       userdata.displayName = userName;
       user.updateProfile(userdata);
@@ -57,12 +55,8 @@ class Auth implements BaseAuth {
       Firestore.instance.collection("users").document(user.uid).setData({
         'uid': user.uid,
         'userName': userName,
-        'profileImage': "",
-        'classes': 0,
-        'school': school,
-        'major': major,
-        'asesorActive': false,
         'created': DateTime.now(),
+        'type' : 'visiter',
       });
     } else {
       return 'error';
