@@ -228,7 +228,7 @@ class _HomePage extends StatelessWidget {
                                             .document(_codigo)
                                             .get()
                                             .then((DocumentSnapshot _doc) {
-                                          print('error: ');
+                                          //print('error: ');
                                           //si existe
                                         }).catchError((e) {
                                           print('error: ' + e);
