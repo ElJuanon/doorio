@@ -1,10 +1,15 @@
+import 'package:doorio/login/root_page.dart';
+import 'package:doorio/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MaterialApp(
       title: 'Door.io',
       theme: ThemeData(
@@ -52,12 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
 
+=======
+    return MultiProvider(
+      providers: [
+        StreamProvider<FirebaseUser>.value(
+            value: FirebaseAuth.instance.onAuthStateChanged),
+      ],
+      child: MaterialApp(
+        title: 'Door.io',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        home: RootPage(
+          auth: new Auth(),
+>>>>>>> cdee3abacf8701e94328ee67059b617796eec426
+        ),
       ),
     );
   }

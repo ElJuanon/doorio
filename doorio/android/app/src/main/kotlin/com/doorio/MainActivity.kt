@@ -1,4 +1,4 @@
-package com.example.doorio
+package com.doorio
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
