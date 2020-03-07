@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
 import 'package:doorio/utils/colors.dart';
@@ -39,6 +40,7 @@ class HomePage extends StatelessWidget {
 class _HomePage extends StatelessWidget {
   _HomePage({Key key, this.onSignedOut}) : super(key: key);
 
+  String _codigo = '';
   final onSignedOut;
 
   @override
@@ -80,29 +82,33 @@ class _HomePage extends StatelessWidget {
   }
 
   _showBody(UserProfile _userProfile, BuildContext context) {
-    try {
-      switch (_userProfile.type) {
-        case "visitor":
-          //cuando es visita mostramos lo sig
-          return _guestPage(context);
-          break;
-        case "user":
-          //cuando es usuario
-          return _userPage();
-          break;
-        case "admin":
-          //cuando es admin
-          return _adminPage();
-          break;
-        case "super":
-          //cuando es superAdmin
-          return _superPage();
-          break;
-        default:
-          Container();
+    if (_userProfile != null) {
+      try {
+        switch (_userProfile.type) {
+          case "visitor":
+            //cuando es visita mostramos lo sig
+            return _guestPage(context);
+            break;
+          case "user":
+            //cuando es usuario
+            return _userPage();
+            break;
+          case "admin":
+            //cuando es admin
+            return _adminPage();
+            break;
+          case "super":
+            //cuando es superAdmin
+            return _superPage();
+            break;
+          default:
+            Container();
+        }
+      } catch (e) {
+        print(e);
+        return Container();
       }
-    } catch (e) {
-      print(e);
+    } else {
       return Container();
     }
   }
@@ -138,14 +144,14 @@ class _HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                'Inicia sesion',
+                                'Ingresa Codigo',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.black),
                               ),
                               Text(
-                                'Inicia sesion en tu cuenta Video Accesos',
+                                'Pega el codigo que te envió un residente',
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.normal,
@@ -154,15 +160,18 @@ class _HomePage extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(bottom: 0),
                                 child: TextFormField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.text,
+                                  maxLength: 28,
                                   autofocus: true,
-                                  inputFormatters: [
-                                    WhitelistingTextInputFormatter(
-                                        RegExp("[0-9]")),
-                                  ],
-                                  onChanged: (text) {},
+                                  // inputFormatters: [
+                                  //   WhitelistingTextInputFormatter(
+                                  //       RegExp("[0-9]")),
+                                  // ],
+                                  onChanged: (text) {
+                                    _codigo = text;
+                                  },
                                   decoration: InputDecoration(
-                                    labelText: "Numero celular de 10 digitos.",
+                                    labelText: "Codigo para generar pase.",
                                   ),
                                   autovalidate: true,
                                   autocorrect: false,
@@ -197,6 +206,17 @@ class _HomePage extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onPressed: () {
+                                        Firestore.instance
+                                            .collection('pass')
+                                            .document(_codigo)
+                                            .get()
+                                            .then((DocumentSnapshot _doc) {
+                                          print('error: ');
+                                          //si existe
+                                        }).catchError((e) {
+                                          print('error: '+e);
+
+                                        });
                                         // if (isValid) {
                                         //   //validar que no exista una cuenta con el mismo numero
                                         //   if (_formMode == FormMode.SIGNUP) {
