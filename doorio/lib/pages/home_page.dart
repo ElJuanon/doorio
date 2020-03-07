@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
 import 'package:doorio/utils/colors.dart';
 import 'package:doorio/utils/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,6 +40,7 @@ class HomePage extends StatelessWidget {
 class _HomePage extends StatelessWidget {
   _HomePage({Key key, this.onSignedOut}) : super(key: key);
 
+  String _codigo = '';
   final onSignedOut;
 
   @override
@@ -79,29 +82,33 @@ class _HomePage extends StatelessWidget {
   }
 
   _showBody(UserProfile _userProfile, BuildContext context) {
-    try {
-      switch (_userProfile.type) {
-        case "visitor":
-          //cuando es visita mostramos lo sig
-          return _guestPage(context);
-          break;
-        case "user":
-          //cuando es usuario
-          return _userPage();
-          break;
-        case "admin":
-          //cuando es admin
-          return _adminPage();
-          break;
-        case "super":
-          //cuando es superAdmin
-          return _superPage();
-          break;
-        default:
-          Container();
+    if (_userProfile != null) {
+      try {
+        switch (_userProfile.type) {
+          case "visitor":
+            //cuando es visita mostramos lo sig
+            return _guestPage(context);
+            break;
+          case "user":
+            //cuando es usuario
+            return _userPage();
+            break;
+          case "admin":
+            //cuando es admin
+            return _adminPage();
+            break;
+          case "super":
+            //cuando es superAdmin
+            return _superPage();
+            break;
+          default:
+            Container();
+        }
+      } catch (e) {
+        print(e);
+        return Container();
       }
-    } catch (e) {
-      print(e);
+    } else {
       return Container();
     }
   }
@@ -145,26 +152,103 @@ class _HomePage extends StatelessWidget {
                           builder: (BuildContext context, StateSetter state) {
                         return Container(
                           padding: EdgeInsets.all(16),
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Center(
-                                child: Text(
-                                  'Al parecer no tienes una cuenta registrada con este numero, crea una cuenta nueva. \nSi tienes problemas creando tu cuenta contactanos al sig. numero: 01800123456',
-                                  style: TextStyle(
-                                      color: Colors.red, fontSize: 15),
+                              Text(
+                                'Ingresa Codigo',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black),
+                              ),
+                              Text(
+                                'Pega el codigo que te envió un residente',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 0),
+                                child: TextFormField(
+                                  keyboardType: TextInputType.text,
+                                  maxLength: 28,
+                                  autofocus: true,
+                                  // inputFormatters: [
+                                  //   WhitelistingTextInputFormatter(
+                                  //       RegExp("[0-9]")),
+                                  // ],
+                                  onChanged: (text) {
+                                    _codigo = text;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "Codigo para generar pase.",
+                                  ),
+                                  autovalidate: true,
+                                  autocorrect: false,
+                                  maxLengthEnforced: true,
+                                  // validator: (value) {
+                                  //   if (value.length == 0) {
+                                  //     return null;
+                                  //   } else {
+                                  //     return !isValid
+                                  //         ? 'Favor de proporcionar un numero celular de 10 digitos'
+                                  //         : null;
+                                  //   }
+                                  // },
                                 ),
                               ),
-                              FlatButton(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 10),
-                                  color: AsterColors.appColor,
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text(
-                                    'Aceptar',
-                                    style: TextStyle(color: Colors.white),
-                                  ))
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                child: Center(
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                    child: RaisedButton(
+                                      color: AsterColors.appColor,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(0.0)),
+                                      child: Text(
+                                        "CONTINUAR",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      onPressed: () {
+                                        Firestore.instance
+                                            .collection('pass')
+                                            .document(_codigo)
+                                            .get()
+                                            .then((DocumentSnapshot _doc) {
+                                          print('error: ');
+                                          //si existe
+                                        }).catchError((e) {
+                                          print('error: '+e);
+
+                                        });
+                                        // if (isValid) {
+                                        //   //validar que no exista una cuenta con el mismo numero
+                                        //   if (_formMode == FormMode.SIGNUP) {
+                                        //     _getUserAccount(
+                                        //         int.parse(_phoneNumberController.text));
+                                        //   } else {
+                                        //     _getUserAccountSignIn(
+                                        //         int.parse(_phoneNumberController.text));
+                                        //   }
+                                        // } else {
+                                        //   validate(state);
+                                        // }
+                                      },
+                                      padding: EdgeInsets.all(16.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         );
