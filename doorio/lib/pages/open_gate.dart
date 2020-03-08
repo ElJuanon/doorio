@@ -3,8 +3,10 @@ import 'package:doorio/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class OpenGate extends StatefulWidget {
-  OpenGate({Key key, this.pass}) : super(key: key);
+  OpenGate({Key key, this.pass, this.docID, this.ref}) : super(key: key);
 
+  final String docID;
+  final String ref;
   final DocumentSnapshot pass;
 
   @override
@@ -26,6 +28,7 @@ class _OpenGateState extends State<OpenGate> {
             ListTile(
               title: Text(''),
             ),
+            RaisedButton(onPressed: (){}, child: Text('ABRIR PUERTA'),)
           ],
         ),
       ),

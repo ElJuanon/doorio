@@ -1,20 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doorio/pages/inv_person.dart';
 import 'package:doorio/pages/open_gate.dart';
+import 'package:doorio/pages/super_stuff.dart';
 import 'package:doorio/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 
-class UserPage extends StatefulWidget {
-  UserPage({Key key}) : super(key: key);
+class SuperPage extends StatefulWidget {
+  SuperPage({Key key}) : super(key: key);
 
   @override
-  _UserPageState createState() => _UserPageState();
+  _SuperPageState createState() => _SuperPageState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _SuperPageState extends State<SuperPage> {
   @override
   Widget build(BuildContext context) {
     FirebaseUser _user = Provider.of<FirebaseUser>(context);
@@ -155,6 +156,34 @@ class _UserPageState extends State<UserPage> {
               padding: EdgeInsets.all(16.0),
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: RaisedButton(
+              color: AsterColors.buttons,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Text(
+                "SUPER STUFF",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => SuperStuff(),
+                  ),
+                );
+              },
+              padding: EdgeInsets.all(16.0),
+            ),
+          ),
+
+          // add admin stuff
         ],
       ),
     );

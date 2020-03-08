@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doorio/pages/admin_page.dart';
+import 'package:doorio/pages/historial.dart';
 import 'package:doorio/pages/open_gate.dart';
+import 'package:doorio/pages/super_page.dart';
 import 'package:doorio/pages/user_page.dart';
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
@@ -101,6 +104,11 @@ class _HomePageState extends State<_HomePage> {
                   color: AsterColors.buttons,
                   size: 30,
                 ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Historial()));
+                },
               ),
               ListTile(
                 title: Text(
@@ -309,24 +317,10 @@ class _HomePageState extends State<_HomePage> {
   }
 
   _adminPage() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          //aqui va la pagina de admin
-          Text('admin'),
-        ],
-      ),
-    );
+    return AdminPage();
   }
 
   _superPage() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          //aqui va la pagina de super usuarios
-          Text('super user'),
-        ],
-      ),
-    );
+    return SuperPage();
   }
 }

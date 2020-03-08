@@ -17,3 +17,41 @@ class UserProfile {
     );
   }
 }
+
+class HistorialInvitacion {
+  final String uid;
+  final int numeroAccesos;
+  final bool evento;
+  final DateTime fechaAcceso;
+  final DateTime fechaCreacion;
+
+  final DocumentReference reference;
+
+  HistorialInvitacion(
+      {this.uid,
+      this.numeroAccesos,
+      this.evento,
+      this.fechaAcceso,
+      this.fechaCreacion,
+      this.reference});
+
+  factory HistorialInvitacion.fromMap(Map data) {
+    return HistorialInvitacion(
+      uid: data['uid'] ?? '',
+      numeroAccesos: data['numeroAccesos'] ?? '',
+      evento: data['evento'] ?? false,
+      fechaAcceso: data['fechaAcceso'] ?? DateTime.now(),
+      fechaCreacion: data['fechaCreacion'] ?? DateTime.now(),
+    );
+  }
+  factory HistorialInvitacion.fromSnapshot(
+      DocumentSnapshot data, DocumentReference reference) {
+    return HistorialInvitacion(
+        uid: data['uid'] ?? '',
+        numeroAccesos: data['numeroAccesos'] ?? 0,
+        evento: data['evento'] ?? false,
+        fechaAcceso: data['fechaAcceso'] ?? DateTime.now(),
+        fechaCreacion: data['fechaCreacion'] ?? DateTime.now(),
+        reference: reference);
+  }
+}
