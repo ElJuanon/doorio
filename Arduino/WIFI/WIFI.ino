@@ -6,7 +6,7 @@
 #include <ESP8266WiFi.h>
 
 #define ssid = "EVENTO.";
-#define password = "TECNOLOGICO2019";
+#define pass = "TECNOLOGICO2019";
 FirebaseData firebaseData;
 
 void setup(){
@@ -17,7 +17,7 @@ void setup(){
 
 
 void connectWifi(){
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid, pass);
 
   while(WiFi.status() != WL_CONNECTED){
     delay(500);
