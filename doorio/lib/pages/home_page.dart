@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doorio/pages/gen_pass.dart';
+import 'package:doorio/pages/user_page.dart';
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
 import 'package:doorio/utils/colors.dart';
@@ -40,10 +42,26 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _HomePage extends StatelessWidget {
+class _HomePage extends StatefulWidget {
   _HomePage({Key key, this.onSignedOut}) : super(key: key);
 
+  final onSignedOut;
+
+  _onSignOut() {
+    onSignedOut();
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    return _HomePageState(onSignedOut: _onSignOut);
+  }
+}
+
+class _HomePageState extends State<_HomePage> {
+  _HomePageState({this.onSignedOut});
+
   String _codigo = '';
+
   final onSignedOut;
 
   @override
@@ -57,8 +75,17 @@ class _HomePage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text(user.displayName ?? ''),
-                accountEmail: Text(user.email ?? ''),
+                  accountName: null,
+                  accountEmail: null,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/doorio_logo.png'),
+                    ),
+                  )),
+              ListTile(
+                title: Text(user.displayName ?? ''),
+                subtitle: Text(user.email ?? ''),
               ),
               ListTile(
                 title: Text('Entradas'),
@@ -121,20 +148,6 @@ class _HomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
-            child: SizedBox(
-              height: 40.0,
-              child: new RaisedButton(
-                elevation: 5.0,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                color: AsterColors.buttons,
-                child: Container(),
-                onPressed: () {},
-              ),
-            ),
-          ),
           //aqui va la pagina de visita
           Center(
             child: Text(
@@ -185,7 +198,9 @@ class _HomePage extends StatelessWidget {
                                   //       RegExp("[0-9]")),
                                   // ],
                                   onChanged: (text) {
-                                    _codigo = text;
+                                    setState(() {
+                                      _codigo = text;
+                                    });
                                   },
                                   decoration: InputDecoration(
                                     labelText: "Codigo para generar pase.",
@@ -193,15 +208,6 @@ class _HomePage extends StatelessWidget {
                                   autovalidate: true,
                                   autocorrect: false,
                                   maxLengthEnforced: true,
-                                  // validator: (value) {
-                                  //   if (value.length == 0) {
-                                  //     return null;
-                                  //   } else {
-                                  //     return !isValid
-                                  //         ? 'Favor de proporcionar un numero celular de 10 digitos'
-                                  //         : null;
-                                  //   }
-                                  // },
                                 ),
                               ),
                               Container(
@@ -223,28 +229,7 @@ class _HomePage extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onPressed: () {
-                                        Firestore.instance
-                                            .collection('pass')
-                                            .document(_codigo)
-                                            .get()
-                                            .then((DocumentSnapshot _doc) {
-                                          //print('error: ');
-                                          //si existe
-                                        }).catchError((e) {
-                                          print('error: ' + e);
-                                        });
-                                        // if (isValid) {
-                                        //   //validar que no exista una cuenta con el mismo numero
-                                        //   if (_formMode == FormMode.SIGNUP) {
-                                        //     _getUserAccount(
-                                        //         int.parse(_phoneNumberController.text));
-                                        //   } else {
-                                        //     _getUserAccountSignIn(
-                                        //         int.parse(_phoneNumberController.text));
-                                        //   }
-                                        // } else {
-                                        //   validate(state);
-                                        // }
+                                        _getPase();
                                       },
                                       padding: EdgeInsets.all(16.0),
                                     ),
@@ -273,15 +258,32 @@ class _HomePage extends StatelessWidget {
     );
   }
 
+  _getPase() async {
+    await Firestore.instance
+        .collection('pass')
+        .document(_codigo)
+        .get()
+        .then((DocumentSnapshot _doc) {
+      if (_doc.data.isNotEmpty) {
+        print('entró: ');
+        //codigo correcto, puede entrar
+
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) => GenPass(
+            pass: _doc,
+          ),
+        ));
+      } else {
+        print('no entró: ');
+      }
+      //si existe
+    }).catchError((e) {
+      print('error: ' + e.toString());
+    });
+  }
+
   _userPage() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          //aqui va la pagina de usuarios
-          Text('usuario'),
-        ],
-      ),
-    );
+    return UserPage();
   }
 
   _adminPage() {

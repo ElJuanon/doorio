@@ -190,7 +190,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           child: new ListView(
             shrinkWrap: true,
             children: <Widget>[
-              //_showLogo(),
+              _showLogo(),
               _showUserNameInput(),
               _showEmailInput(),
               _showPasswordInput(),
@@ -231,7 +231,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 48.1,
-          child: Image.asset('assets/logo/astter_logo.png'),
+          child: Image.asset('assets/doorio_logo.png'),
         ),
       ),
     );
