@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doorio/pages/gen_pass.dart';
+import 'package:doorio/pages/open_gate.dart';
 import 'package:doorio/pages/user_page.dart';
 import 'package:doorio/services/authentication.dart';
 import 'package:doorio/services/db.dart';
@@ -84,16 +84,34 @@ class _HomePageState extends State<_HomePage> {
                     ),
                   )),
               ListTile(
-                title: Text(user.displayName ?? ''),
-                subtitle: Text(user.email ?? ''),
+                title: Text(user.displayName ?? '',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                subtitle: Text(user.email ?? '',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               ),
               ListTile(
-                title: Text('Entradas'),
-                leading: Icon(Icons.insert_drive_file),
+                title: Text(
+                  'Entradas',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                leading: Icon(
+                  Icons.insert_drive_file,
+                  color: AsterColors.buttons,
+                  size: 30,
+                ),
               ),
               ListTile(
-                title: Text('Cerrar Sesion'),
-                leading: Icon(Icons.cancel),
+                title: Text(
+                  'Cerrar Sesion',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                leading: Icon(
+                  Icons.cancel,
+                  color: AsterColors.buttons,
+                  size: 30,
+                ),
                 onTap: () {
                   Navigator.of(context).pop();
                   onSignedOut();
@@ -103,7 +121,11 @@ class _HomePageState extends State<_HomePage> {
           ),
         ),
         appBar: AppBar(
-          title: Text("Inicio"),
+          backgroundColor: AsterColors.appColor,
+          title: Text(
+            "Inicio",
+            style: TextStyle(fontSize: 23),
+          ),
           centerTitle: true,
         ),
         body: _showBody(_userProfile, context),
@@ -246,7 +268,7 @@ class _HomePageState extends State<_HomePage> {
                 'Crear',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
-              color: AsterColors.appColor,
+              color: AsterColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -269,7 +291,7 @@ class _HomePageState extends State<_HomePage> {
         //codigo correcto, puede entrar
 
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => GenPass(
+          builder: (BuildContext context) => OpenGate(
             pass: _doc,
           ),
         ));
