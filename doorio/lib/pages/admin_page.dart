@@ -68,11 +68,6 @@ class _AdminPageState extends State<AdminPage> {
                               "evento": true,
                             });
 
-                            // String _docID = Firestore.instance
-                            //     .collection('pass')
-                            //     .document(_ref)
-                            //     .documentID;
-
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
