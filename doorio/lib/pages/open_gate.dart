@@ -21,7 +21,7 @@ class _OpenGateState extends State<OpenGate> {
         appBar: AppBar(
           title: Text('Abrir Puerta'),
           centerTitle: true,
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
         ),
         body: Column(
           children: <Widget>[

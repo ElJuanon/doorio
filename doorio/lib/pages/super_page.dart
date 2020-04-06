@@ -28,7 +28,7 @@ class _SuperPageState extends State<SuperPage> {
             padding: const EdgeInsets.only(top: 25),
             child: Center(
               child: RaisedButton(
-                color: AsterColors.buttons,
+                color: DoorColors.buttons,
                 elevation: 5.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
@@ -103,7 +103,7 @@ class _SuperPageState extends State<SuperPage> {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: RaisedButton(
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -131,7 +131,7 @@ class _SuperPageState extends State<SuperPage> {
           Padding(
             padding: const EdgeInsets.all(0),
             child: RaisedButton(
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -160,7 +160,7 @@ class _SuperPageState extends State<SuperPage> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: RaisedButton(
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),

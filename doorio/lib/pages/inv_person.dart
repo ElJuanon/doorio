@@ -58,7 +58,7 @@ class _InvitacionPState extends State<InvitacionP> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
           title: Text(widget.qrI ? 'Invitacion Personal' : 'Evento'),
           centerTitle: true,
           leading: IconButton(
@@ -184,7 +184,7 @@ class _InvitacionPState extends State<InvitacionP> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.85,
                                   child: RaisedButton(
-                                    color: AsterColors.buttons,
+                                    color: DoorColors.buttons,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0)),
@@ -264,7 +264,7 @@ class _InvitacionPState extends State<InvitacionP> {
             color: Colors.white,
           ),
         ),
-        color: AsterColors.appColor,
+        color: DoorColors.appColor,
       ),
     );
   }
@@ -293,7 +293,7 @@ class _InvitacionPState extends State<InvitacionP> {
           elevation: 5.0,
           shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0)),
-          color: AsterColors.buttons,
+          color: DoorColors.buttons,
           onPressed: () {
             if (widget.qrI) {
               //es una invitacion individual

@@ -16,7 +16,7 @@ class _SuperStuffState extends State<SuperStuff> {
         appBar: AppBar(
           title: Text('Super Stuff'),
           centerTitle: true,
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
         ),
         body: Center(
           child: Text('Coming Soon...', style: TextStyle(fontSize: 20)),

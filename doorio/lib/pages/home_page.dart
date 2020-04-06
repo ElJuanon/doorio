@@ -101,7 +101,7 @@ class _HomePageState extends State<_HomePage> {
                 ),
                 leading: Icon(
                   Icons.insert_drive_file,
-                  color: AsterColors.buttons,
+                  color: DoorColors.buttons,
                   size: 30,
                 ),
                 onTap: () {
@@ -117,7 +117,7 @@ class _HomePageState extends State<_HomePage> {
                 ),
                 leading: Icon(
                   Icons.cancel,
-                  color: AsterColors.buttons,
+                  color: DoorColors.buttons,
                   size: 30,
                 ),
                 onTap: () {
@@ -129,7 +129,7 @@ class _HomePageState extends State<_HomePage> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
           title: Text(
             "Inicio",
             style: TextStyle(fontSize: 23),
@@ -247,7 +247,7 @@ class _HomePageState extends State<_HomePage> {
                                     width: MediaQuery.of(context).size.width *
                                         0.85,
                                     child: RaisedButton(
-                                      color: AsterColors.appColor,
+                                      color: DoorColors.appColor,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(0.0)),
@@ -276,7 +276,7 @@ class _HomePageState extends State<_HomePage> {
                 'Crear',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),

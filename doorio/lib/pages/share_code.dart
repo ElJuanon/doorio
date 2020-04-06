@@ -19,7 +19,7 @@ class _ShareCodeState extends State<ShareCode> {
         appBar: AppBar(
           title: Text('Compartir invitacion'),
           centerTitle: true,
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +57,7 @@ class _ShareCodeState extends State<ShareCode> {
                 elevation: 5.0,
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(30.0)),
-                color: AsterColors.buttons,
+                color: DoorColors.buttons,
                 onPressed: () {
                   Share.text(
                       'my text title', widget.ref, 'text/plain');

@@ -135,7 +135,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     // }else if(Platform.isAndroid){
     return new Scaffold(
         appBar: new AppBar(
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
           title: new Text(
               (_formMode == FormMode.LOGIN) ? 'Iniciar sesión' : 'Regístrate'),
           centerTitle: true,
@@ -380,7 +380,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0)),
-            color: AsterColors.appColor,
+            color: DoorColors.appColor,
             child: _formMode == FormMode.LOGIN
                 ? new Text('Iniciar sesión',
                     style: new TextStyle(fontSize: 20.0, color: Colors.white))

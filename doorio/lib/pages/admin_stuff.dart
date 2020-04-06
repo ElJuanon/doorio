@@ -16,7 +16,7 @@ class _AdminStuffState extends State<AdminStuff> {
         appBar: AppBar(
           title: Text('Admin Stuff'),
           centerTitle: true,
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
         ),
         body: Center(
           child: Text('Coming Soon...', style: TextStyle(fontSize: 20)),

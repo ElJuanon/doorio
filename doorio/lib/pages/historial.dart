@@ -26,7 +26,7 @@ class _Historial extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AsterColors.appColor,
+          backgroundColor: DoorColors.appColor,
           title: Text('Historial'),
           centerTitle: true,
           leading: IconButton(

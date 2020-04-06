@@ -27,7 +27,7 @@ class _UserPageState extends State<UserPage> {
             padding: const EdgeInsets.only(top: 25),
             child: Center(
               child: RaisedButton(
-                color: AsterColors.buttons,
+                color: DoorColors.buttons,
                 elevation: 5.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
@@ -102,7 +102,7 @@ class _UserPageState extends State<UserPage> {
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: RaisedButton(
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -130,7 +130,7 @@ class _UserPageState extends State<UserPage> {
           Padding(
             padding: const EdgeInsets.all(0),
             child: RaisedButton(
-              color: AsterColors.buttons,
+              color: DoorColors.buttons,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
