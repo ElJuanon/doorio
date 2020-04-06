@@ -68,10 +68,6 @@ class _SuperPageState extends State<SuperPage> {
                               "evento": true,
                             });
 
-                            String _docID = Firestore.instance
-                                .collection('pass')
-                                .document(_ref)
-                                .documentID;
 
                             Navigator.of(context).push(
                               MaterialPageRoute(

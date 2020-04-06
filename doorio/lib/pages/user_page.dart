@@ -67,11 +67,6 @@ class _UserPageState extends State<UserPage> {
                               "evento": true,
                             });
 
-                            String _docID = Firestore.instance
-                                .collection('pass')
-                                .document(_ref)
-                                .documentID;
-
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>

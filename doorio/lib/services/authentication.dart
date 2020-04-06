@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class BaseAuth {
   Future<String> signIn(String email, String password);
@@ -25,21 +23,6 @@ class Auth implements BaseAuth {
     AuthResult _authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user = _authResult.user;
-    //FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-    //String fcmToken = await _firebaseMessaging.getToken();
-    //if (fcmToken != null) {
-    // var tokens = Firestore.instance
-    //     .collection('users')
-    //     .document(user.uid)
-    //     .collection('tokens')
-    //     .document(fcmToken);
-
-    // await tokens.setData({
-    //   'token': fcmToken,
-    //   'createdAt': FieldValue.serverTimestamp(), // optional
-    //   'platform': Platform.operatingSystem // optional
-    // });
-    //}
     return user.uid;
   }
 
@@ -62,22 +45,6 @@ class Auth implements BaseAuth {
       return 'error';
     }
 
-    // FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-    // String fcmToken = await _firebaseMessaging.getToken();
-    // if (fcmToken != null) {
-    //   var tokens = Firestore.instance
-    //       .collection('users')
-    //       .document(user.uid)
-    //       .collection('tokens')
-    //       .document(fcmToken);
-
-    //   await tokens.setData({
-    //     'token': fcmToken,
-    //     'createdAt': FieldValue.serverTimestamp(), // optional
-    //     'platform': Platform.operatingSystem // optional
-    //   });
-    // }
-
     return user.uid;
   }
 
@@ -87,19 +54,6 @@ class Auth implements BaseAuth {
   }
 
   Future<void> signOut() async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    // FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-    // String fcmToken = await _firebaseMessaging.getToken();
-    // if (fcmToken != null) {
-    //   var tokens = Firestore.instance
-    //       .collection('users')
-    //       .document(user.uid)
-    //       .collection('tokens')
-    //       .document(fcmToken);
-
-    //   await tokens.delete();
-    // }
-
     return _firebaseAuth.signOut();
   }
 
